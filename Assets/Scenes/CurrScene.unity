@@ -688,12 +688,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 37e663062aa67bc49970a2a96cc08b1d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8674dc63cbf512245ae409b888fd92f3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 1
-  m_Size: {x: 5, y: 5}
+  m_Size: {x: 3, y: 5.2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -722,17 +722,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 1543470345}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26e81947ea2294941b0eb1a1c619d5be, type: 3}
+  m_Script: {fileID: 11500000, guid: 98e888651385f834b9e19615a837d88f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Ball: {fileID: 1877930391}
   HitLogic: {fileID: 207805793}
   isPlayer1: 0
-  movementSpeed: 7
+  movementSpeed: 3
   net: {fileID: 1052984090}
   toBall: {x: 0, y: 0, z: 0}
   cam: {fileID: 1122744606}
-  stoppingDistance: 0.2
+  stoppingDistance: 4
 --- !u!135 &1543470349
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -957,8 +957,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2077363464}
   - component: {fileID: 2077363463}
-  - component: {fileID: 2077363465}
   - component: {fileID: 2077363466}
+  - component: {fileID: 2077363465}
   m_Layer: 0
   m_Name: Player1
   m_TagString: Untagged
@@ -1038,14 +1038,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 2077363462}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26e81947ea2294941b0eb1a1c619d5be, type: 3}
+  m_Script: {fileID: 11500000, guid: 98e888651385f834b9e19615a837d88f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Ball: {fileID: 1877930391}
   HitLogic: {fileID: 207805793}
   isPlayer1: 1
-  movementSpeed: 7
-  net: {fileID: 1052984090}
+  movementSpeed: 3
+  net: {fileID: 0}
   toBall: {x: 0, y: 0, z: 0}
   cam: {fileID: 1122744606}
   stoppingDistance: 4
