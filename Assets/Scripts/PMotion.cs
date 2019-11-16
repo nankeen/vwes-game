@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RunToBall : MonoBehaviour
+public class PMotion : MonoBehaviour
 {
     public GameObject Ball;
     public GameObject HitLogic;
@@ -31,7 +31,8 @@ public class RunToBall : MonoBehaviour
             {
                 HitLogic.GetComponent<web>().inP1HitBox = true;
             }
-            else {
+            else
+            {
                 HitLogic.GetComponent<web>().inP2HitBox = true;
             }
         }
@@ -72,7 +73,7 @@ public class RunToBall : MonoBehaviour
             transform.position = queryPos;
         }
 
-        
+
 
     }
 }
