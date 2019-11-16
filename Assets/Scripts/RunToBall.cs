@@ -9,6 +9,7 @@ public class RunToBall : MonoBehaviour
     public BoxCollider net;
     public Vector3 toBall;
     public Camera cam;
+    public float stoppingDistance = 4;
     private Vector3 courtPlaneNormal = Vector3.up;
     private Vector3 nextPositionDiff;
     private Vector3 queryPos;
@@ -29,12 +30,13 @@ public class RunToBall : MonoBehaviour
 
         //move towards ball
         toBall = Ball.transform.position - transform.position;
+        toBall = toBall - Vector3.Normalize(toBall) * stoppingDistance;
         nextPositionDiff = Vector3.Normalize(Vector3.ProjectOnPlane(toBall, courtPlaneNormal)) * movementSpeed * Time.deltaTime;
 
         //if not about to cross over court
         queryPos = transform.position + nextPositionDiff;
         Vector3 closp = net.ClosestPointOnBounds(queryPos);
-        if (Vector3.Distance(closp, queryPos) > 20)
+        if (Vector3.Distance(closp, queryPos) > 5)
         {
             transform.position = queryPos;
         }
