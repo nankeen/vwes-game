@@ -34,7 +34,10 @@ public class web : MonoBehaviour
         hitVec.z = -(transform.position.z + GaussianRandom.generateNormalRandom(0, 1)); //Gaussian noise added to z. Range -23 to +23 depend on pos
         //positive x if player2, neg if player1
         hitVec.x = 20;
-        if (isPlayer1) { hitVec.x *= -1; }
+        if (swing.playerId == "1")
+        {
+            hitVec.x *= -1;
+        }
         hitVec.y = 20 + GaussianRandom.generateNormalRandom(0, 3);
         return hitVec;
     }
@@ -42,6 +45,8 @@ public class web : MonoBehaviour
     IEnumerator Start()
     {
         ballrb = Ball.GetComponent<Rigidbody>();
+
+        ballrb.Sleep();
 
         WebSocket w = new WebSocket(new Uri("ws://vwes-backend.uksouth.azurecontainer.io/ws/new/"));
         yield return StartCoroutine(w.Connect());
@@ -65,11 +70,13 @@ public class web : MonoBehaviour
 
                 //Check the force and determine the ball's velocity
                 if (action == "soft") {
+                    ballrb.WakeUp();
                     toBall = (Ball.transform.position - transform.position) / (Ball.transform.position - transform.position).magnitude;
                     Debug.Log("hit soft by " + swing.playerId);
                     ballrb.AddForce(GenHitVector() * smallHitForce);
                 }
                 else {
+                    ballrb.WakeUp();
                     toBall = toBall = (Ball.transform.position - transform.position) / (Ball.transform.position - transform.position).magnitude;
                     Debug.Log("hit hard by " + swing.playerId);
                     ballrb.AddForce(GenHitVector() * smallHitForce);
