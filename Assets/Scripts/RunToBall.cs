@@ -36,7 +36,7 @@ public class RunToBall : MonoBehaviour
         //if not about to cross over court
         queryPos = transform.position + nextPositionDiff;
         Vector3 closp = net.ClosestPointOnBounds(queryPos);
-        if (Vector3.Distance(closp, queryPos) > 5)
+        if (Vector3.Distance(closp, queryPos) > 23 && Vector3.Distance(closp, queryPos) < 34)
         {
             transform.position = queryPos;
         }
