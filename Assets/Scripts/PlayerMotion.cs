@@ -25,16 +25,30 @@ public class RunToBall : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.name == "Ball" && isPlayer1)
-            HitLogic.getComponent<web>().inP1HitBox = true;
-
+        if (other.gameObject.name == "Ball")
+        {
+            if (isPlayer1)
+            {
+                HitLogic.GetComponent<web>().inP1HitBox = true;
+            }
+            else {
+                HitLogic.GetComponent<web>().inP2HitBox = true;
+            }
+        }
     }
 
-    private void OnTriggerLeave(Collider other)
+    private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.name == "Ball")
         {
-            BallinHitBox = false;
+            if (isPlayer1)
+            {
+                HitLogic.GetComponent<web>().inP1HitBox = false;
+            }
+            else
+            {
+                HitLogic.GetComponent<web>().inP2HitBox = false;
+            }
         }
     }
 

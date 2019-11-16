@@ -67,27 +67,33 @@ public class web : MonoBehaviour
             string msgStr = w.RecvString();
 
 
-            if (msgStr != null && (swing.playerId == "0" && inP1HitBox) || (swing.playerId == "2" && inP2HitBox))//checks if message nonempty then whether swing valid
+            if (msgStr != null )//checks if message nonempty then whether swing valid
             {
                 //Assign variable for the second string
                 swing = JsonConvert.DeserializeObject<Player>(msgStr);
                 string action = swing.action;
                 Debug.Log("Connection received: Player " + swing.playerId);
 
-                //Check the force and determine the ball's velocity
-                if (action == "soft") {
-                    ballrb.WakeUp();
-                    //toBall = (Ball.transform.position - transform.position) / (Ball.transform.position - transform.position).magnitude;
-                    Debug.Log("hit soft by " + swing.playerId);
-                    ballrb.AddForce(GenHitVector() * smallHitForce);
+
+
+                if ((swing.playerId == "1" && inP1HitBox) || (swing.playerId == "0" && inP2HitBox)) //checks swing valid
+                {
+                    //Check the force and determine the ball's velocity
+                    if (action == "soft")
+                    {
+                        ballrb.WakeUp();
+                        //toBall = (Ball.transform.position - transform.position) / (Ball.transform.position - transform.position).magnitude;
+                        Debug.Log("hit soft by " + swing.playerId);
+                        ballrb.AddForce(GenHitVector() * smallHitForce);
+                    }
+                    else
+                    {
+                        ballrb.WakeUp();
+                        //toBall = toBall = (Ball.transform.position - transform.position) / (Ball.transform.position - transform.position).magnitude;
+                        Debug.Log("hit hard by " + swing.playerId);
+                        ballrb.AddForce(GenHitVector() * bigHitForce);
+                    }
                 }
-                else {
-                    ballrb.WakeUp();
-                    //toBall = toBall = (Ball.transform.position - transform.position) / (Ball.transform.position - transform.position).magnitude;
-                    Debug.Log("hit hard by " + swing.playerId);
-                    ballrb.AddForce(GenHitVector() * bigHitForce);
-                }
-                
             }
             if (w.error != null)
             {
