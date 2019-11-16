@@ -20,11 +20,29 @@ public class Player
 public class web : MonoBehaviour
 {
     public GameObject player;
+    public GameObject Ball;
+    public float smallHitForce;
+
     private Player swing;
     private Room room;
+    private Vector3 toBall;
+    private Rigidbody ballrb;
+
+    Vector3 GenHitVector()
+    {
+        Vector3 hitVec = new Vector3();
+        hitVec.z = -(transform.position.z + GaussianRandom.generateNormalRandom(0, 1)); //Gaussian noise added to z. Range -23 to +23 depend on pos
+        //positive x if player2, neg if player1
+        hitVec.x = 20;
+        if (isPlayer1) { hitVec.x *= -1; }
+        hitVec.y = 20 + GaussianRandom.generateNormalRandom(0, 3);
+        return hitVec;
+    }
 
     IEnumerator Start()
     {
+        ballrb = Ball.GetComponent<Rigidbody>();
+
         WebSocket w = new WebSocket(new Uri("ws://vwes-backend.uksouth.azurecontainer.io/ws/new/"));
         yield return StartCoroutine(w.Connect());
         string roomStr = w.RecvString();
@@ -43,11 +61,19 @@ public class web : MonoBehaviour
                 //Assign variable for the second string
                 swing = JsonConvert.DeserializeObject<Player>(msgStr);
                 string action = swing.action;
-                Debug.Log("Connection received: " + swing.action + " from " + swing.playerId);
+                Debug.Log("Connection received: Player " + swing.playerId);
 
                 //Check the force and determine the ball's velocity
-                if (action == "soft") { }
-                else { }
+                if (action == "soft") {
+                    toBall = (Ball.transform.position - transform.position) / (Ball.transform.position - transform.position).magnitude;
+                    Debug.Log("hit soft by " + swing.playerId);
+                    ballrb.AddForce(GenHitVector() * smallHitForce);
+                }
+                else {
+                    toBall = toBall = (Ball.transform.position - transform.position) / (Ball.transform.position - transform.position).magnitude;
+                    Debug.Log("hit hard by " + swing.playerId);
+                    ballrb.AddForce(GenHitVector() * smallHitForce);
+                }
                 
             }
             if (w.error != null)
