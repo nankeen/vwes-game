@@ -17,20 +17,6 @@ public class HitBall : MonoBehaviour
         ballrb = Ball.GetComponent<Rigidbody>();
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        Debug.Log("test");
-        BallinHitBox = true;
-
-    }
-
-    private void OnTriggerLeave(Collider other)
-    {
-        if (other.gameObject.name == "Ball")
-        {
-            BallinHitBox = false;
-        }
-    }
 
     // Update is called once per frame
     void Update()
@@ -39,16 +25,28 @@ public class HitBall : MonoBehaviour
         {
             Debug.Log("T");
         }
-        if (BallinHitBox)
-        {
-            Debug.Log("yey");
-        }
 
         if (Input.GetKeyDown(KeyCode.J) && BallinHitBox)
         {
             toBall = Vector3.Normalize(transform.position - Ball.transform.position);
 
             Ball.GetComponent<Rigidbody>().AddForce(toBall * smallHitForce);
+        }
+    }
+
+    private void onTriggerEnter(Collider other)
+    {
+        if (other.gameObject.name == "Ball")
+        {
+            BallinHitBox = true;
+        }
+    }
+
+    private void onTriggerLeave(Collider other)
+    {
+        if (other.gameObject.name == "Ball")
+        {
+            BallinHitBox = false;
         }
     }
 }
