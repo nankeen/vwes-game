@@ -120,6 +120,50 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &175792987
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 175792989}
+  - component: {fileID: 175792988}
+  m_Layer: 0
+  m_Name: Boundary
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &175792988
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 175792987}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 20, z: 60}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &175792989
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 175792987}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1052984089
 GameObject:
   m_ObjectHideFlags: 0
@@ -391,6 +435,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Ball: {fileID: 1877930391}
   movementSpeed: 3
+  boundary: {fileID: 175792988}
   toBall: {x: 0, y: 0, z: 0}
   cam: {fileID: 1122744606}
 --- !u!135 &1543470349
@@ -401,7 +446,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1543470345}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 2.5
@@ -618,6 +663,7 @@ GameObject:
   - component: {fileID: 2077363464}
   - component: {fileID: 2077363463}
   - component: {fileID: 2077363465}
+  - component: {fileID: 2077363467}
   - component: {fileID: 2077363466}
   m_Layer: 0
   m_Name: Player1
@@ -703,6 +749,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Ball: {fileID: 1877930391}
   movementSpeed: 3
+  boundary: {fileID: 175792988}
   toBall: {x: 0, y: 0, z: 0}
   cam: {fileID: 1122744606}
 --- !u!135 &2077363466
@@ -718,3 +765,18 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 2.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2077363467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2077363462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1166d59d6359e9d4ba9f2cc44b59e5a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Ball: {fileID: 1877930391}
+  BallinHitBox: 0
+  smallHitForce: 10
