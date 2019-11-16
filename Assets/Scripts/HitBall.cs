@@ -17,15 +17,14 @@ public class HitBall : MonoBehaviour
         ballrb = Ball.GetComponent<Rigidbody>();
     }
 
-    private void onTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.name == "Ball")
-        {
-            BallinHitBox = true;
-        }
+        Debug.Log("test");
+        BallinHitBox = true;
+
     }
 
-    private void onTriggerLeave(Collider other)
+    private void OnTriggerLeave(Collider other)
     {
         if (other.gameObject.name == "Ball")
         {
@@ -39,6 +38,10 @@ public class HitBall : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.J))
         {
             Debug.Log("T");
+        }
+        if (BallinHitBox)
+        {
+            Debug.Log("yey");
         }
 
         if (Input.GetKeyDown(KeyCode.J) && BallinHitBox)
