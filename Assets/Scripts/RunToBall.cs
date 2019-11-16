@@ -16,7 +16,7 @@ public class RunToBall : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -25,7 +25,7 @@ public class RunToBall : MonoBehaviour
         //always face camera
         transform.LookAt(cam.transform);
 
-       
+
         //move towards ball
         toBall = Ball.transform.position - transform.position;
         nextPositionDiff = Vector3.Normalize(Vector3.ProjectOnPlane(toBall, courtPlaneNormal)) * movementSpeed * Time.deltaTime;
