@@ -17,7 +17,6 @@ public class BallCollisionDetection : MonoBehaviour
     public GameObject p1;
     public GameObject p2;
 
-
     // Update is called once per frame
     void Update()
     {
