@@ -5,6 +5,8 @@ using UnityEngine;
 public class RunToBall : MonoBehaviour
 {
     public GameObject Ball;
+    public GameObject HitLogic;
+    public bool isPlayer1 = false;
     public float movementSpeed;
     public BoxCollider net;
     public Vector3 toBall;
@@ -19,6 +21,21 @@ public class RunToBall : MonoBehaviour
     void Start()
     {
 
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.name == "Ball" && isPlayer1)
+            HitLogic.getComponent<web>().inP1HitBox = true;
+
+    }
+
+    private void OnTriggerLeave(Collider other)
+    {
+        if (other.gameObject.name == "Ball")
+        {
+            BallinHitBox = false;
+        }
     }
 
     // Update is called once per frame

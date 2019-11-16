@@ -19,6 +19,9 @@ public class Player
 
 public class web : MonoBehaviour
 {
+    public bool inP1HitBox = false;
+    public bool inP2HitBox = false;
+
     public GameObject player;
     public GameObject Ball;
     public float smallHitForce;
@@ -62,7 +65,9 @@ public class web : MonoBehaviour
         {
             //Creates a variable of the response that the server might have sent to us
             string msgStr = w.RecvString();
-            if (msgStr != null)
+
+
+            if (msgStr != null && (swing.playerId == "0" && inP1HitBox) || (swing.playerId == "2" && inP2HitBox))//checks if message nonempty then whether swing valid
             {
                 //Assign variable for the second string
                 swing = JsonConvert.DeserializeObject<Player>(msgStr);
