@@ -175,7 +175,7 @@ GameObject:
   - component: {fileID: 207805795}
   - component: {fileID: 207805794}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: HitLogic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -193,6 +193,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5de210fe2e9cf4541a70428840107ce7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inP1HitBox: 0
+  inP2HitBox: 0
   player: {fileID: 2077363462}
   Ball: {fileID: 1877930391}
   smallHitForce: 4
@@ -724,6 +726,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Ball: {fileID: 1877930391}
+  HitLogic: {fileID: 207805793}
+  isPlayer1: 0
   movementSpeed: 7
   net: {fileID: 1052984090}
   toBall: {x: 0, y: 0, z: 0}
@@ -1038,6 +1042,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Ball: {fileID: 1877930391}
+  HitLogic: {fileID: 207805793}
+  isPlayer1: 1
   movementSpeed: 7
   net: {fileID: 1052984090}
   toBall: {x: 0, y: 0, z: 0}
