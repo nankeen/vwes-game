@@ -67,4 +67,20 @@ public class HitBall : MonoBehaviour
             ballrb.AddForce(GenHitVector() * smallHitForce);
         }
     }
+
+    private void onTriggerEnter(Collider other)
+    {
+        if (other.gameObject.name == "Ball")
+        {
+            BallinHitBox = true;
+        }
+    }
+
+    private void onTriggerLeave(Collider other)
+    {
+        if (other.gameObject.name == "Ball")
+        {
+            BallinHitBox = false;
+        }
+    }
 }
