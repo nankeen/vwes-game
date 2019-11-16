@@ -20,8 +20,9 @@ public class HitBall : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         Debug.Log("test");
+        if (other.gameObject.name == "Ball") { }
         BallinHitBox = true;
-
+  
     }
 
     void OnTriggerStay(Collider other)
