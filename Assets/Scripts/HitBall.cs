@@ -28,7 +28,7 @@ public class HitBall : MonoBehaviour
     }
 
 
-    void OnTriggerLeave(Collider other)
+    void OnTriggerExit(Collider other)
     {
         if (other.gameObject.name == "Ball")
         {
@@ -42,7 +42,8 @@ public class HitBall : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.J) && BallinHitBox)
         {
-            toBall = Vector3.Normalize(Ball.transform.position - transform.position);
+            toBall = (Ball.transform.position - transform.position) / (Ball.transform.position - transform.position).magnitude;
+            
             Debug.Log("hit soft by " + gameObject.name);
             Ball.GetComponent<Rigidbody>().AddForce(toBall * smallHitForce);
         }
