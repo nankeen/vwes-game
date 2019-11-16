@@ -467,8 +467,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Ball: {fileID: 1877930391}
   BallinHitBox: 0
-  smallHitForce: 100
-  bigHitForce: 200
+  isPlayer1: 0
+  smallHitForce: 2
+  bigHitForce: 3
 --- !u!1 &1877930391
 GameObject:
   m_ObjectHideFlags: 0
@@ -798,5 +799,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Ball: {fileID: 1877930391}
   BallinHitBox: 0
-  smallHitForce: 100
-  bigHitForce: 200
+  isPlayer1: 1
+  smallHitForce: 2
+  bigHitForce: 3
