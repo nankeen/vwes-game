@@ -9,6 +9,7 @@ public class HitBall : MonoBehaviour
     private Rigidbody ballrb;
     public bool BallinHitBox = false;
     public float smallHitForce;
+    public float bigHitForce;
 
 
     // Start is called before the first frame update
@@ -19,18 +20,13 @@ public class HitBall : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log("test");
-        if (other.gameObject.name == "Ball") { }
-        BallinHitBox = true;
-  
+        
+        if (other.gameObject.name == "Ball")
+        {
+            BallinHitBox = true;
+        }
     }
 
-    void OnTriggerStay(Collider other)
-    {
-        Debug.Log("test");
-        BallinHitBox = true;
-
-    }
 
     void OnTriggerLeave(Collider other)
     {
@@ -43,20 +39,18 @@ public class HitBall : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.J))
-        {
-            Debug.Log("T");
-        }
-        if (BallinHitBox)
-        {
-            Debug.Log("yey");
-        }
 
         if (Input.GetKeyDown(KeyCode.J) && BallinHitBox)
         {
-            toBall = Vector3.Normalize(transform.position - Ball.transform.position);
-
+            toBall = Vector3.Normalize(Ball.transform.position - transform.position);
+            Debug.Log("hit soft by " + gameObject.name);
             Ball.GetComponent<Rigidbody>().AddForce(toBall * smallHitForce);
+        }
+        if (Input.GetKeyDown(KeyCode.K) && BallinHitBox)
+        {
+            toBall = Vector3.Normalize(Ball.transform.position - transform.position);
+            Debug.Log("hit hard by " + gameObject.name);
+            Ball.GetComponent<Rigidbody>().AddForce(toBall * bigHitForce);
         }
     }
 }

@@ -6,11 +6,12 @@ public class RunToBall : MonoBehaviour
 {
     public GameObject Ball;
     public float movementSpeed;
-    public BoxCollider boundary;
+    public BoxCollider net;
     public Vector3 toBall;
     public Camera cam;
     private Vector3 courtPlaneNormal = Vector3.up;
     private Vector3 nextPositionDiff;
+    private Vector3 queryPos;
 
     private bool inBoundary = false;
     // Start is called before the first frame update
@@ -31,7 +32,14 @@ public class RunToBall : MonoBehaviour
         nextPositionDiff = Vector3.Normalize(Vector3.ProjectOnPlane(toBall, courtPlaneNormal)) * movementSpeed * Time.deltaTime;
 
         //if not about to cross over court
-        transform.position += nextPositionDiff;
+        queryPos = transform.position + nextPositionDiff;
+        Vector3 closp = net.ClosestPointOnBounds(queryPos);
+        if (Vector3.Distance(closp, queryPos) > 20)
+        {
+            transform.position = queryPos;
+        }
+
+        
 
     }
 }
