@@ -1,4 +1,4 @@
-# Vigorous wrist exercise simulator
+# Vigorous Wrist Exercise Simulator
 This is a tennis ball game that uses Android cellphones as a controller to play the game, we got this idea from Will Sport.
 
 ## How-to
