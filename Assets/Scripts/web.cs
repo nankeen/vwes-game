@@ -24,6 +24,11 @@ public class web : MonoBehaviour
     public bool inP2HitBox = false;
     public GameObject ScoringObject;
 
+    public AudioSource mh;
+    public AudioSource fh;
+    public AudioSource ms;
+    public AudioSource fs;
+
     public GameObject player;
     public GameObject Ball;
     public float smallHitForce;
@@ -33,6 +38,8 @@ public class web : MonoBehaviour
     private Room room;
     //private Vector3 toBall;
     private Rigidbody ballrb;
+
+    private bool nextAudioHard = false;
 
     private void updateLastHitter(bool p1lasthitter)
     {
@@ -46,11 +53,31 @@ public class web : MonoBehaviour
         //positive x if player2, neg if player1
         hitVec.x = 47;
         if (swing.playerId == "1")
-        {
+        { //woman
+            if (nextAudioHard)
+            {
+                fh.Play(0);
+            }
+            else
+            {
+                fs.Play(0);
+            }
+
             updateLastHitter(true);
             hitVec.x *= -1;
         }
-        else { updateLastHitter(false); }
+        else
+        {
+            if (nextAudioHard)
+            {
+                mh.Play(0);
+            }
+            else
+            {
+                ms.Play(0);
+            }
+            updateLastHitter(false);
+        }
         hitVec.y = 10 + GaussianRandom.generateNormalRandom(0, 1);
         return hitVec;
     }
@@ -98,21 +125,23 @@ public class web : MonoBehaviour
                     //Check the force and determine the ball's velocity
                     if (action == "soft")
                     {
+                        nextAudioHard = false;
                         ballrb.WakeUp();
                         ballrb.isKinematic = false;
                         //toBall = (Ball.transform.position - transform.position) / (Ball.transform.position - transform.position).magnitude;
                         Debug.Log("hit soft by " + swing.playerId);
                         ballrb.velocity = Vector3.Project(ballrb.velocity, Vector3.down);
-                        ballrb.AddForce(Vector3.Scale(GenHitVector(), ((new Vector3(1,0,1)) * smallHitForce) + new Vector3(0,3,0)));
+                        ballrb.AddForce(Vector3.Scale(GenHitVector(), ((new Vector3(1,0,1)) * smallHitForce) + new Vector3(0,3.5f,0)));
                     }
                     else
                     {
+                        nextAudioHard = true;
                         ballrb.WakeUp();
                         ballrb.isKinematic = false;
                         //toBall = toBall = (Ball.transform.position - transform.position) / (Ball.transform.position - transform.position).magnitude;
                         Debug.Log("hit hard by " + swing.playerId);
                         ballrb.velocity = Vector3.Project(ballrb.velocity, Vector3.down);
-                        ballrb.AddForce(Vector3.Scale(GenHitVector(), ((new Vector3(1, 0, 1)) * bigHitForce) + new Vector3(0, 2.5f, 0)));
+                        ballrb.AddForce(Vector3.Scale(GenHitVector(), ((new Vector3(1, 0, 1)) * bigHitForce) + new Vector3(0, 3, 0)));
                     }
                 }
             }
