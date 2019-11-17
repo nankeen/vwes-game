@@ -19,8 +19,10 @@ public class Player
 
 public class web : MonoBehaviour
 {
+    public string roomIdPublic = "";
     public bool inP1HitBox = false;
     public bool inP2HitBox = false;
+    public GameObject ScoringObject;
 
     public GameObject player;
     public GameObject Ball;
@@ -32,7 +34,12 @@ public class web : MonoBehaviour
     //private Vector3 toBall;
     private Rigidbody ballrb;
 
-    Vector3 GenHitVector()
+    private void updateLastHitter(bool p1lasthitter)
+    {
+        ScoringObject.GetComponent<ScoringLogic>().P1lasthitter = p1lasthitter;
+    }
+
+    Vector3 GenHitVector() //this will only be called if a player hit the ball 
     {
         Vector3 hitVec = new Vector3();
         hitVec.z = -(transform.position.z + GaussianRandom.generateNormalRandom(0, 3)); //Gaussian noise added to z. Range -23 to +23 depend on pos
@@ -40,8 +47,10 @@ public class web : MonoBehaviour
         hitVec.x = 47;
         if (swing.playerId == "1")
         {
+            updateLastHitter(true);
             hitVec.x *= -1;
         }
+        else { updateLastHitter(false); }
         hitVec.y = 10 + GaussianRandom.generateNormalRandom(0, 1);
         return hitVec;
     }
@@ -63,6 +72,8 @@ public class web : MonoBehaviour
         room = JsonConvert.DeserializeObject<Room>(roomStr);
 
         //The reply will be the info about the room
+        roomIdPublic = room.roomId;
+        ScoringObject.GetComponent<ScoringLogic>().resetCourt();
         Debug.Log("Welcome to the game room " + room.roomId);
         Debug.Log("Now we have " + room.playersConnected + " player");
 
