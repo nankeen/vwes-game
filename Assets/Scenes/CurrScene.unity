@@ -309,8 +309,8 @@ MonoBehaviour:
   inP2HitBox: 0
   player: {fileID: 2077363462}
   Ball: {fileID: 1877930391}
-  smallHitForce: 5
-  bigHitForce: 6
+  smallHitForce: 4.2
+  bigHitForce: 5.4
 --- !u!4 &207805795
 Transform:
   m_ObjectHideFlags: 0
