@@ -10,6 +10,9 @@ public class ScoringLogic : MonoBehaviour
     public Text score;
     public GameObject HitLogic;
 
+    public GameObject P1;
+    public GameObject P2;
+
     private bool GameOver = false;
     private int winner = -1;
 
@@ -18,6 +21,9 @@ public class ScoringLogic : MonoBehaviour
 
     public bool ballHasCollided = false;
     public bool ballInP1Half = false;
+
+    private bool P1ToServe = false; //if not P1ToServe, is P2ToServe
+    private int serveCounter = 0;
 
     public int bounceCountP1 = 0; //these 4 public for debugging but should be priv
     public int bounceCountP2 = 0;
@@ -86,7 +92,7 @@ public class ScoringLogic : MonoBehaviour
         }
     }
 
-    public void resetCourt()
+    private void checkWinner()
     {
         if (P1Score <= 3 && P2Score <= 3)
         {
@@ -107,16 +113,40 @@ public class ScoringLogic : MonoBehaviour
             GameOver = true;
             winner = 2;
         }
-        else {
+        else
+        {
             GameOver = true;
             winner = 1;
         }
+    }
+
+    public void resetCourt()
+    {
+        checkWinner();
 
         bounceCountP1 = 0;
         bounceCountP2 = 0;
         score.text = toTennisScore(P1Score, P2Score);
         GameObject ball = GameObject.Find("Ball");
-        ball.transform.position = new Vector3(-21.2f, 11.89f, 9.87f); // uh oh
+
+        if (((P1Score + P2Score) / 2) % 2 == 0) //gives true true false false ttff...
+        {
+            //P1 to serve
+            P1.transform.position = new Vector3(30.2f, 6, 7.58f);
+            P2.transform.position = new Vector3(-31.6f, 6, 15.74f);
+            ball.transform.position = new Vector3(-21.2f, 11.89f, 9.87f);
+            HitLogic.GetComponent<web>().freezeBall();
+
+        } else {
+            //P2 to serve
+            P2.transform.position = new Vector3(-31.6f, 6, -7.58f);
+            P1.transform.position = new Vector3(30.2f, 6, -15.74f);
+            ball.transform.position = new Vector3(21.2f, 11.89f, -9.87f);
+            HitLogic.GetComponent<web>().freezeBall();
+
+        }
+
+         // uh oh
         HitLogic.GetComponent<web>().freezeBall();
         //TODO
     }

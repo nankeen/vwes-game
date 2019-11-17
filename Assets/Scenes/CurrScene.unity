@@ -181,6 +181,8 @@ MonoBehaviour:
   Net: {fileID: 1052984090}
   score: {fileID: 907763964}
   HitLogic: {fileID: 207805793}
+  P1: {fileID: 2077363462}
+  P2: {fileID: 1543470345}
   ballOutBounds: 0
   P1lasthitter: 0
   ballHasCollided: 0
