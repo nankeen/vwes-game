@@ -37,14 +37,20 @@ public class web : MonoBehaviour
         Vector3 hitVec = new Vector3();
         hitVec.z = -(transform.position.z + GaussianRandom.generateNormalRandom(0, 3)); //Gaussian noise added to z. Range -23 to +23 depend on pos
         //positive x if player2, neg if player1
-        hitVec.x = 40;
+        hitVec.x = 47;
         if (swing.playerId == "1")
         {
             hitVec.x *= -1;
         }
-        hitVec.y = 10 + GaussianRandom.generateNormalRandom(0, 3);
+        hitVec.y = 10 + GaussianRandom.generateNormalRandom(0, 1);
         return hitVec;
     }
+
+    public void freezeBall()
+    {
+        ballrb.isKinematic = true;
+    }
+
 
     IEnumerator Start()
     {
@@ -66,6 +72,7 @@ public class web : MonoBehaviour
             //Creates a variable of the response that the server might have sent to us
             string msgStr = w.RecvString();
 
+            
 
             if (msgStr != null )//checks if message nonempty then whether swing valid
             {
@@ -82,16 +89,18 @@ public class web : MonoBehaviour
                     if (action == "soft")
                     {
                         ballrb.WakeUp();
+                        ballrb.isKinematic = false;
                         //toBall = (Ball.transform.position - transform.position) / (Ball.transform.position - transform.position).magnitude;
                         Debug.Log("hit soft by " + swing.playerId);
-                        ballrb.AddForce(GenHitVector() * smallHitForce);
+                        ballrb.AddForce(Vector3.Scale(GenHitVector(), ((new Vector3(1,0,1)) * smallHitForce) + new Vector3(0,3,0)));
                     }
                     else
                     {
                         ballrb.WakeUp();
+                        ballrb.isKinematic = false;
                         //toBall = toBall = (Ball.transform.position - transform.position) / (Ball.transform.position - transform.position).magnitude;
                         Debug.Log("hit hard by " + swing.playerId);
-                        ballrb.AddForce(GenHitVector() * bigHitForce);
+                        ballrb.AddForce(Vector3.Scale(GenHitVector(), ((new Vector3(1, 0, 1)) * bigHitForce) + new Vector3(0, 2.5f, 0)));
                     }
                 }
             }
