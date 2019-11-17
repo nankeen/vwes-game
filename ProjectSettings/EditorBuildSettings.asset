@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/CurrScene.unity
+    guid: a3a29e211fcd7004db082f6d3d8624d4
   m_configObjects: {}
