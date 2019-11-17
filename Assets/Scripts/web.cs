@@ -51,7 +51,6 @@ public class web : MonoBehaviour
         ballrb.isKinematic = true;
     }
 
-
     IEnumerator Start()
     {
         ballrb = Ball.GetComponent<Rigidbody>();
@@ -92,6 +91,7 @@ public class web : MonoBehaviour
                         ballrb.isKinematic = false;
                         //toBall = (Ball.transform.position - transform.position) / (Ball.transform.position - transform.position).magnitude;
                         Debug.Log("hit soft by " + swing.playerId);
+                        ballrb.velocity = Vector3.Project(ballrb.velocity, Vector3.down);
                         ballrb.AddForce(Vector3.Scale(GenHitVector(), ((new Vector3(1,0,1)) * smallHitForce) + new Vector3(0,3,0)));
                     }
                     else
@@ -100,6 +100,7 @@ public class web : MonoBehaviour
                         ballrb.isKinematic = false;
                         //toBall = toBall = (Ball.transform.position - transform.position) / (Ball.transform.position - transform.position).magnitude;
                         Debug.Log("hit hard by " + swing.playerId);
+                        ballrb.velocity = Vector3.Project(ballrb.velocity, Vector3.down);
                         ballrb.AddForce(Vector3.Scale(GenHitVector(), ((new Vector3(1, 0, 1)) * bigHitForce) + new Vector3(0, 2.5f, 0)));
                     }
                 }
