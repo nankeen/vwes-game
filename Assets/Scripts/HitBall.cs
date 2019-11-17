@@ -11,11 +11,13 @@ public class HitBall : MonoBehaviour
     public bool isPlayer1;
     public float smallHitForce;
     public float bigHitForce;
+    private Animator animator;
 
     // Start is called before the first frame update
     void Start()
     {
         ballrb = Ball.GetComponent<Rigidbody>();
+        animator = GetComponent<Animator>();
     }
 
     void OnTriggerEnter(Collider other)

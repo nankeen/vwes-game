@@ -36,6 +36,7 @@ public class web : MonoBehaviour
 
     private Player swing;
     private Room room;
+    private Animator animator;
     //private Vector3 toBall;
     private Rigidbody ballrb;
 
@@ -93,7 +94,7 @@ public class web : MonoBehaviour
 
         ballrb.Sleep();
 
-        WebSocket w = new WebSocket(new Uri("ws://vwes-backend.uksouth.azurecontainer.io/ws/new/"));
+        WebSocket w = new WebSocket(new Uri("ws://vwes-backend.uksouth.azurecontainer.io/ws/new/")); //:(
         yield return StartCoroutine(w.Connect());
         string roomStr = w.RecvString();
         room = JsonConvert.DeserializeObject<Room>(roomStr);
@@ -122,6 +123,13 @@ public class web : MonoBehaviour
 
                 if ((swing.playerId == "1" && inP1HitBox) || (swing.playerId == "0" && inP2HitBox)) //checks swing valid
                 {
+                    if (swing.playerId == "1")
+                    {
+                        animator = GameObject.Find("Player1").GetComponent<Animator>();
+                    } else
+                    {
+                        animator = GameObject.Find("Player2").GetComponent<Animator>();
+                    }
                     //Check the force and determine the ball's velocity
                     if (action == "soft")
                     {
@@ -143,6 +151,9 @@ public class web : MonoBehaviour
                         ballrb.velocity = Vector3.Project(ballrb.velocity, Vector3.down);
                         ballrb.AddForce(Vector3.Scale(GenHitVector(), ((new Vector3(1, 0, 1)) * bigHitForce) + new Vector3(0, 3, 0)));
                     }
+                    animator.SetBool("isHitting", true);
+                    yield return new WaitForSeconds(0.5f);
+                    animator.SetBool("isHitting", false);
                 }
             }
             if (w.error != null)
