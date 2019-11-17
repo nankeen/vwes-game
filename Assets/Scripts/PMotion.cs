@@ -72,6 +72,7 @@ public class PMotion : MonoBehaviour
         {
             transform.position = queryPos;
         }
+        else { transform.position += Vector3.Project(nextPositionDiff, Vector3.forward); }
 
 
 
